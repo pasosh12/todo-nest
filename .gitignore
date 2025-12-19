@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+
+npm-debug.log*
+.eslintcache
+
+todo-app/node_modules/
+todo-app/dist/
+todo-web/node_modules/
+todo-web/dist/
+
+
+todo-app/database.sqlite

@@ -1,0 +1,11 @@
+{
+    "name": "todo-monorepo",
+    "private": true,
+    "workspaces": [
+        "todo-app",
+        "todo-web"
+    ],
+    "scripts": {
+        "start:all": "npm start --prefix todo-app & npm run dev --prefix todo-web"
+    }
+}
