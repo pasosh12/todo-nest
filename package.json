@@ -6,6 +6,11 @@
         "todo-web"
     ],
     "scripts": {
-        "start:all": "npm start --prefix todo-app & npm run dev --prefix todo-web"
+        "start:all": "concurrently \"npm start --prefix todo-app\" \"npm run dev --prefix todo-web\"",
+        "docker:up": "docker compose up --build",
+        "docker:down": "docker compose down"
+    },
+    "devDependencies": {
+        "concurrently": "^9.2.1"
     }
 }

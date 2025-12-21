@@ -8,7 +8,7 @@ interface Task {
   updatedAt: string;
 }
 
-const API_URL = 'http://localhost:3000/tasks';
+const API_URL = '/tasks';
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
