@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { CreateTaskCommand } from "./cqrs/commands/create-task.command";
 import { ListTaskQuery } from "./cqrs/queries/list-task.query";
@@ -7,6 +8,7 @@ import { DeleteTaskCommand } from "./cqrs/commands/delete-task.command";
 import { UpdateByCompletedCommand } from "./cqrs/commands/update-by-completed.command";
 
 @Controller('tasks')
+@UseGuards(AuthGuard('jwt'))
 export class TaskController {
     constructor(
         private readonly commandBus: CommandBus,
