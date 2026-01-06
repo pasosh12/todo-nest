@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Task } from 'src/task/entities/task.entity';
 
 @Entity()
 export class User {
@@ -19,4 +20,7 @@ export class User {
 
     @Column({ unique: true })
     googleId: string;
+
+    @OneToMany(() => Task, (task) => task.user)
+    tasks: Task[];
 }
