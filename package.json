@@ -6,7 +6,10 @@
         "todo-web"
     ],
     "scripts": {
+        "dev": "npm run start:all",
         "start:all": "concurrently \"npm start --prefix todo-app\" \"npm run dev --prefix todo-web\"",
+        "db:up": "docker compose up -d db",
+        "db:down": "docker compose stop db",
         "docker:up": "docker compose up --build",
         "docker:down": "docker compose down"
     },
