@@ -10,7 +10,7 @@ export class ListTaskHandler implements IQueryHandler<ListTaskQuery> {
         @InjectRepository(Task)
         private readonly taskRepository: Repository<Task>,
     ) { }
-    execute(): Promise<Task[]> {
-        return this.taskRepository.find();
+    execute(query: ListTaskQuery): Promise<Task[]> {
+        return this.taskRepository.find({ where: { userId: query.userId } });
     }
 }

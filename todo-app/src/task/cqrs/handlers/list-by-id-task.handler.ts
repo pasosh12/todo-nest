@@ -12,6 +12,10 @@ export class ListByIdTaskHandler implements IQueryHandler<ListByIdTaskQuery> {
     ) { }
 
     execute(query: ListByIdTaskQuery): Promise<Task | null> {
-        return this.taskRepository.findOneBy({ id: query.id });
+        const task = this.taskRepository.findOneBy({ id: query.id });
+        if (!task) {
+            throw new Error('Task not found');
+        }
+        return task;
     }
 }

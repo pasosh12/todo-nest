@@ -53,6 +53,8 @@ services:
     volumes:
       - ./todo-web:/app
       - /app/node_modules
+    environment:
+      - VITE_API_URL=http://backend:3000
     command: npm run dev -- --host
     depends_on:
       - backend

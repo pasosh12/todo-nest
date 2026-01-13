@@ -13,6 +13,10 @@ export class DeleteTaskHandler implements ICommandHandler<DeleteTaskCommand> {
     ) { }
     async execute(command: DeleteTaskCommand): Promise<void> {
         const { id } = command;
+        const task = await this.taskRepository.findOne({ where: { id } });
+        if (!task) {
+            throw new Error('Task not found');
+        }
         await this.taskRepository.delete(id);
     }
 }

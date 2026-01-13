@@ -12,7 +12,8 @@ export class CreateTaskHandler implements ICommandHandler<CreateTaskCommand> {
         private readonly taskRepository: Repository<Task>,
     ) { }
     execute(command: CreateTaskCommand): Promise<Task> {
-        const { description } = command;
-        return this.taskRepository.save({ description });
+        const { description, userId } = command;
+        const task = this.taskRepository.create({ description, userId });
+        return this.taskRepository.save(task);
     }
 }

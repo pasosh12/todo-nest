@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Inject, Param, Post, Req, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { CreateTaskCommand } from "./cqrs/commands/create-task.command";
@@ -15,12 +15,14 @@ export class TaskController {
         private readonly queryBus: QueryBus
     ) { }
     @Post()
-    async create(@Body('description') description: string) {
-        return this.commandBus.execute(new CreateTaskCommand(description));
+    async create(@Body('description') description: string, @Req() req) {
+        const userId = req.user.userId;
+        return this.commandBus.execute(new CreateTaskCommand(description, userId));
     }
     @Get()
-    async find() {
-        return this.queryBus.execute(new ListTaskQuery());
+    async find(@Req() req) {
+        const userId = req.user.userId;
+        return this.queryBus.execute(new ListTaskQuery(userId));
     }
     @Get(':id')
     async findById(@Param('id') id: number) {

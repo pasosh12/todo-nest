@@ -1,1 +1,5 @@
-export class ListTaskQuery { }
+export class ListTaskQuery {
+    constructor(
+        public readonly userId: number
+    ) { }
+}
